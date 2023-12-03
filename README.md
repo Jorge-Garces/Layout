@@ -9,65 +9,48 @@
 
 ## Contenidos de esta plantilla
 
-- Cnversión de Tailwind a Bootstrap (usa Bootstrap 5)
+- Conversión de Tailwind a Bootstrap (usa Bootstrap 5)
 - Login instalado, modifica la base de datos
 - Livewire
 - Spinner (estilos y script en layouts/app + include)
 - Mensajes flash (include)
+- Iconos Font Aweosme V6
+- Redirección oblitaria HTTPS
+- Envío de emails
+- Trusted Proxies 🙂
+- Modal de prueba en el layout
+- Log con queries realizadas desde la app
+- Logger modificado con inclusión de un canal customizado
 
-## About Laravel
+## Como instalar
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Haz un git clone del layout, para descargarlo en donde quieres hostear la app
+- Típico composer install para descargar vendor y toda la parafernalia esa
+- Luego "npm install" para instalar node modules y luego "npm run build" para correr la app y mandar el vite
+- Copia el .env example a un ".env", pon los datos que toquen en ese momento y edita el docker compose para que tenga los datos de la nueva app
+- Ejecuta el "docker compose up -d" y mira a ver si se te levanta la app
+- Añade el docker al Proxy y si quieres ponlo directamente con HTTPS. Recuerda cambiarlo en AppServiceProvider
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Cosas que sueles usar
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Añadir una FK a una tabla usando MySQL directamente
 
-## Learning Laravel
+```
+ALTER TABLE [TABLA A EDITAR]
+ADD FOREIGN KEY ([CAMPO DE TABLA A EDITAR]) REFERENCES [TABLA ORIGEN]([CAMPO DE TABLA ORIGEN]);
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Ej:
+ALTER TABLE reservas
+ADD FOREIGN KEY (id_apartamento) REFERENCES apartamentos(id);
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Restablecer el autoincrement. En "valor" pones el siguiente ID que se va a usar. Es decir, si pones el 1000, el siguiente registro de la tabla tendrá el 1000
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+ALTER TABLE [TABLA] AUTO_INCREMENT = [VALOR];
+```
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- El loading spinner se carga añadiendo la clase "loading" a cualquier botón. Esto lanzará el loading pero no se quitará hasta que resfresques la página. Puedes hacer pruebas con livewire para intentar mandar un evento desde el controler y quitar el spinner sin recargar
 
 ## License
 

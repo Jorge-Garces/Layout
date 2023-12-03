@@ -54,7 +54,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['daily'],
             'ignore_exceptions' => false,
         ],
 
@@ -67,10 +67,23 @@ return [
 
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/laravel/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
-            'days' => 14,
+            'days' => 90,
             'replace_placeholders' => true,
+        ],
+
+        'mysql' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/mysql/mysql.log'),
+            'days' => 90,
+        ],
+
+        // Log::channel('mychannel)->infor('Texto a logear');
+        'mychannel' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/mychannel/mychannel.log'),
+            'days' => 90,
         ],
 
         'slack' => [

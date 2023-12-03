@@ -20,6 +20,8 @@
 - Modal de prueba en el layout
 - Log con queries realizadas desde la app
 - Logger modificado con inclusión de un canal customizado
+- Envío de emails
+- Impresión de PDF
 
 ## Como instalar
 

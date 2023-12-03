@@ -15,6 +15,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    <a class="btn btn-success" href="{{ route('pdf') }}">Imprimir PDF</a>
                 </div>
             </div>
         </div>

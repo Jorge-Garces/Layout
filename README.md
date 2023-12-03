@@ -29,6 +29,7 @@
 - Copia el .env example a un ".env", pon los datos que toquen en ese momento y edita el docker compose para que tenga los datos de la nueva app
 - Ejecuta el "docker compose up -d" y mira a ver si se te levanta la app
 - Añade el docker al Proxy y si quieres ponlo directamente con HTTPS. Recuerda cambiarlo en AppServiceProvider
+- Si vas a usar el envío de emails, recuerda establecer las variables del correo en el .env, si no, no funcionará
 
 ## Cosas que sueles usar
 

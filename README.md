@@ -16,7 +16,6 @@
 - Mensajes flash (include)
 - Iconos Font Aweosme V6
 - Redirección oblitaria HTTPS
-- Envío de emails
 - Trusted Proxies 🙂
 - Modal de prueba en el layout
 - Log con queries realizadas desde la app
@@ -50,7 +49,56 @@ ADD FOREIGN KEY (id_apartamento) REFERENCES apartamentos(id);
 ALTER TABLE [TABLA] AUTO_INCREMENT = [VALOR];
 ```
 
-- El loading spinner se carga añadiendo la clase "loading" a cualquier botón. Esto lanzará el loading pero no se quitará hasta que resfresques la página. Puedes hacer pruebas con livewire para intentar mandar un evento desde el controler y quitar el spinner sin recargar
+- El loading spinner se carga añadiendo la clase "loading" a cualquier botón. Esto lanzará el loading pero no se quitará hasta que resfresques la página.
+
+- Para hacer que puedas cerrar el spinner desde un controler, lo primero que necesitas es un full-page component de Livewire (no has probado los simples)
+
+En la plantilla de blade añade esto (el listener es "spinner"):
+
+```
+@section('script')
+    <script>
+        Livewire.on('spinner', () => {
+            document.getElementById('spinner-overlay').style.display = 'none';
+        })
+    </script>
+@endsection
+```
+
+En el controlador añade esto:
+
+```
+public function toggleSpinner()
+{
+    $this->emit('spinner'); // Listener en el section de script
+}
+```
+
+Donde las variables publicas del componente de Livewire añade esto:
+
+```
+protected $listeners = ['toggleSpinner']; // El nombre de este array es el que tenga la función que tiene que estar a la escucha
+```
+
+- Siempre que uses un full-page component de Livewire tienes que tener en cuenta varias cosas.
+
+Que la ruta va sin método
+
+```
+Route::get('/ruta', ControllerLivewire::class)->name('ruta');
+```
+
+Que el return del render tiene que tener este aspecto
+
+```
+return view('livewire.test-livewire')
+    ->extends('layouts.app')
+    ->section('content');
+```
+
+Que el componente en blade debe tener siempre un <div>
+
+Que las variables que uses en el blade tienen que estar declaradas publicamente arriba del todo en el controlador, justo debajo de "extends Component"
 
 ## License
 

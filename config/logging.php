@@ -73,6 +73,7 @@ return [
             'replace_placeholders' => true,
         ],
 
+        /* Añadido por mi, no viene por defecto en Laravel */
         'mysql' => [
             'driver' => 'daily',
             'path' => storage_path('logs/mysql/mysql.log'),
